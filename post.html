@@ -17,12 +17,19 @@
         </div>
         <div  x-show="!$store.post.loading" class="container">
             <h1 class="title is-1" x-text="$store.post.data.title"></h1>
-            <div class="content" x-html="toHtml({blocks: $store.post.data.body, projectId: '0ggffobx', dataset: 'production', imageOptions: { w: 320, h: 240, fit: 'max' } })"></div>
+            <!-- change '0ggffobx' to your projectId from Sanity.io -->
+            <div class="content" x-html="toHtml({
+                blocks: $store.post.data.body,
+                projectId: '0ggffobx',
+                dataset: 'production',
+                imageOptions: { w: 320, h: 240, fit: 'max' } 
+            })"></div>
         </div>
     </section>
 </body>
 <script>
     const query = encodeURIComponent(`*[_type == "post" && slug.current == "${window.location.pathname.split('/')[2]}"][0]`)
+    //change '0ggffobx' to your projectId from Sanity.io
     const sanityURL = `https://0ggffobx.api.sanity.io/v1/data/query/production?query=${query}`;
     async function getData() {
         return await fetch(sanityURL).then(res => res.json()).then(data => data.result)
@@ -34,6 +41,7 @@
             updateStore(newData) {
                 this.data = newData;
                 this.isLoaded();
+                //edit "Simplest Blog Ever" to change the title. Leave "newData.title"
                 document.title = newData.title + " | Simplest Blog Ever"
             },
             isLoaded() {

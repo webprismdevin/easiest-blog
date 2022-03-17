@@ -14,6 +14,7 @@
     <section class="section">
         <div class="container" x-data="{ posts: [], ...toHtml }"
             x-init="posts = await (await fetch('https://0ggffobx.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20%22post%22%5D%20%7C%20order%20(publishedAt%20desc)').then(res => res.json()).then(data => data.result))">
+                                            <!-- change '0ggffobx' to your projectId from Sanity.io -->
             <h1 class="title is-1">The Easiest Blog To Build</h1>
             <p class="block">Built by <a href="http://webprism.co">WEBPRISM</a></p>
             <p>Content hosted on <a href="https://sanity.io" target="_blank">Sanity.io</a>, hosted on <a href="https://vercel.com" target="_blank">Vercel</a>, using <a href="https://alpinejs.dev" target="_blank">Alpine.js</a>, styled with <a href="https://bulma.io" target="_blank">Bulma</a>.</p>
