@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simplest Blog Ever</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="/bundle.js"></script>
+    <link rel="stylesheet" href="/loader.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section" x-data="{post: $store.post, ...toHtml}">
+        <div x-show="$store.post.loading" class="container has-text-centered">
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+        </div>
+        <div  x-show="!$store.post.loading" class="container">
+            <h1 class="title is-1" x-text="$store.post.data.title"></h1>
+            <div class="content" x-html="toHtml({blocks: $store.post.data.body, projectId: '0ggffobx', dataset: 'production', imageOptions: { w: 320, h: 240, fit: 'max' } })"></div>
+        </div>
+    </section>
+</body>
+<script>
+    const query = encodeURIComponent(`*[_type == "post" && slug.current == "${window.location.pathname.split('/')[2]}"][0]`)
+    const sanityURL = `https://0ggffobx.api.sanity.io/v1/data/query/production?query=${query}`;
+
+    async function getData() {
+        return await fetch(sanityURL).then(res => res.json()).then(data => data.result)
+    }
+
+    document.addEventListener('alpine:init', async () => {
+        Alpine.store('post', {
+            data: {},
+            loading: true,
+            updateStore(newData) {
+                this.data = newData;
+                this.isLoaded();
+                document.title = newData.title + " | Simplest Blog Ever"
+            },
+            isLoaded() {
+                this.loading = false;
+            }
+        })
+
+        Alpine.store('post').updateStore(await getData())
+    })
+</script>
+</html>

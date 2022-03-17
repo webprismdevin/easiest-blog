@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simplest Blog Ever</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="/bundle.js"></script>
+    <link rel="stylesheet" href="/loader.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container" x-data="{ posts: [], ...toHtml }"
+            x-init="posts = await (await fetch('https://0ggffobx.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20%22post%22%5D%20%7C%20order%20(publishedAt%20desc)').then(res => res.json()).then(data => data.result))">
+            <h1 class="title is-1">The Easiest Blog To Build</h1>
+            <p class="block">Built by <a href="http://webprism.co">WEBPRISM</a></p>
+            <p>Content hosted on <a href="https://sanity.io" target="_blank">Sanity.io</a>, hosted on <a href="https://vercel.com" target="_blank">Vercel</a>, using <a href="https://alpinejs.dev" target="_blank">Alpine.js</a>, styled with <a href="https://bulma.io" target="_blank">Bulma</a>.</p>
+            <hr class="divider" />
+            <div x-show="posts.length === 0" class="container has-text-centered">
+                <div class="lds-facebook"><div></div><div></div><div></div></div>
+            </div>
+            <template x-for="post in posts">
+                <div class="box">
+                    <h2 class="title is-2" x-text="post.title"></h2>
+                    <a x-bind:href="'/post/' + post.slug.current">Read more...</a>
+                </div>
+            </template>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>Crafted by <a href="https://webprism.co">WEBPRISM</a></p>
+        </div>
+    </footer> 
+</body>
+</html>
