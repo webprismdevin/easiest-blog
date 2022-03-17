@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simplest Blog Ever</title>
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="/bundle.js"></script>
-    <link rel="stylesheet" href="/loader.css" type="text/css">
+    <script src="/alpine.min.js" defer></script>
+    <script src="/bundle.min.js"></script>
+    <link rel="stylesheet" href="/loader.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
 <body>
@@ -17,6 +17,7 @@
             <h1 class="title is-1">The Easiest Blog To Build</h1>
             <p class="block">Built by <a href="http://webprism.co">WEBPRISM</a></p>
             <p>Content hosted on <a href="https://sanity.io" target="_blank">Sanity.io</a>, hosted on <a href="https://vercel.com" target="_blank">Vercel</a>, using <a href="https://alpinejs.dev" target="_blank">Alpine.js</a>, styled with <a href="https://bulma.io" target="_blank">Bulma</a>.</p>
+            <p class="block">Get the code <a href="https://github.com/webprismdevin/easiest-blog" target="_blank">here</a>.</p>
             <hr class="divider" />
             <div x-show="posts.length === 0" class="container has-text-centered">
                 <div class="lds-facebook"><div></div><div></div><div></div></div>

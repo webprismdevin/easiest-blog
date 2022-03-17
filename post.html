@@ -24,11 +24,9 @@
 <script>
     const query = encodeURIComponent(`*[_type == "post" && slug.current == "${window.location.pathname.split('/')[2]}"][0]`)
     const sanityURL = `https://0ggffobx.api.sanity.io/v1/data/query/production?query=${query}`;
-
     async function getData() {
         return await fetch(sanityURL).then(res => res.json()).then(data => data.result)
     }
-
     document.addEventListener('alpine:init', async () => {
         Alpine.store('post', {
             data: {},
@@ -42,7 +40,6 @@
                 this.loading = false;
             }
         })
-
         Alpine.store('post').updateStore(await getData())
     })
 </script>
