@@ -4,6 +4,8 @@ This template/repository is intended to be a tutorial that someone with no knowl
 
 [Check out the demo site](https://simple-blog.webprism.xyz/)
 
+[Video walkthrough](https://youtu.be/Ze1TI6y4pnY)
+
 ## Before You Begin
 To build this project, you'll need 
 - a [Github](https://github.com/) account
